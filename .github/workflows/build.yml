@@ -1,0 +1,32 @@
+name: Build Portable Windows App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows you to trigger the build manually if needed
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-dir: '20'
+
+      - name: Install Project Dependencies
+        run: npm install
+
+      - name: Compile Portable Executable
+        run: npm run build
+
+      - name: Upload Finished App Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Physics-Wallah-Portable
+          path: dist/
