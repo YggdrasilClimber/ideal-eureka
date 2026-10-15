@@ -1,0 +1,30 @@
+{
+  "name": "allen-app",
+  "version": "1.0.0",
+  "description": "ALLEN desktop wrapper",
+  "main": "main.js",
+
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+
+  "devDependencies": {
+    "electron": "^44.0.0",
+    "electron-builder": "^26.0.0"
+  },
+
+  "build": {
+    "appId": "com.allen.wrapper",
+    "productName": "ALLEN",
+
+    "directories": {
+      "output": "dist"
+    },
+
+    "win": {
+      "target": "dir",
+      "icon": "icon.ico"
+    }
+  }
+}
