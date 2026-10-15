@@ -1,32 +1,31 @@
-name: Build Portable Windows App
+name: Build Electron App
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch: # Allows you to trigger the build manually if needed
+    branches: [ "main", "master" ]
 
 jobs:
-  release:
+  build:
     runs-on: windows-latest
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-dir: '20'
+          node-version: 20
+          cache: 'npm'
 
-      - name: Install Project Dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Compile Portable Executable
+      - name: Build Electron App
         run: npm run build
 
-      - name: Upload Finished App Artifact
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Physics-Wallah-Portable
+          name: windows-portable-app
           path: dist/
